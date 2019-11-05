@@ -10,7 +10,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "debug": "NODE_ENV=debug npm test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -27,5 +28,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "puppeteer": "^2.0.0"
   }
 }
