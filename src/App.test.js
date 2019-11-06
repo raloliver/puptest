@@ -1,10 +1,10 @@
 const puppeteer = require('puppeteer');
 
 const isDebugging = () => {
-  const debugging_mode = {
+  let debugging_mode = {
     headless: false,
-    slowMo: 2500,
-    devtools: true,
+    slowMo: 250,
+    devtools: false,
     // executablePath: string,
     // timeout: number,
     // ignoreHTTPSErrors: bool
@@ -19,8 +19,8 @@ describe('on page load', () => {
 
     page.emulate({
       viewport: {
-        width: 1366,
-        height: 2400
+        width: 480,
+        height: 1920
       },
       userAgent: ''
     })
@@ -31,6 +31,6 @@ describe('on page load', () => {
 
     expect(html).toBe('Learn React');
 
-    await browser.close();
-  }, 1600)
+    browser.close();
+  })
 });
