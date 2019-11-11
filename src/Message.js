@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Message.css'
 
-export default function Success() {
+export default function Message() {
     return (
         <div>
           <div className="wincc">
