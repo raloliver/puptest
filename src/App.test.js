@@ -70,13 +70,14 @@ describe('on page load', () => {
 
     await page.click('[data-testid="submit"]');
 
+    //use method .tap() to simulate touch screen event
     await page.waitForSelector('[data-testid="success"]');
   }, 16000)
 });
 
 
-// afterAll(() => {
-//   if (isDebugging()) {
-//     browser.close();
-//   }
-// });
+afterAll(() => {
+  if (isDebugging()) {
+    browser.close();
+  }
+});
