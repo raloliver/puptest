@@ -12,25 +12,43 @@ const isDebugging = () => {
   return process.env.NODE_ENV === 'debug' ? debugging_mode : {};
 };
 
+let browser;
+let page;
+
+beforeAll(async () => {
+  browser = await puppeteer.launch(isDebugging());
+  page = await browser.newPage();
+  await page.goto('http://localhost:3000/');
+  page.emulate({
+    viewport: {
+      width: 480,
+      height: 1920
+    },
+    userAgent: ''
+  })
+});
+
 describe('on page load', () => {
   test('link loads correctly', async () => {
-    let browser = await puppeteer.launch(isDebugging());
-    let page = await browser.newPage();
-
-    page.emulate({
-      viewport: {
-        width: 480,
-        height: 1920
-      },
-      userAgent: ''
-    })
-
-    await page.goto('http://localhost:3000/');
     //.$eval its like a document.querySelector
     const html = await page.$eval('.App-link', e => e.innerHTML);
 
     expect(html).toBe('Learn React');
-
-    browser.close();
   })
+
+  test('menu loading', async () => {
+    const navbar = await page.$eval('.navbar', el => el ? true : false);
+    //$$ like a document.querySelectorAll
+    const menu = await page.$$('.nav-li');
+
+    expect(navbar).toBe(true);
+    expect(menu.length).toBe(4);
+  });
+});
+
+
+afterAll(() => {
+  if (isDebugging()) {
+    browser.close();
+  }
 });
